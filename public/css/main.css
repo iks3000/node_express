@@ -1,0 +1,42 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+header {
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.link-nav {
+    float: right;
+    padding-right: 60px;
+    padding-top: 35px;
+}
+
+.link-nav > a {
+    color: #0b97c4;
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+.link-nav > a:hover {
+    color: darkolivegreen;
+}
+
+.nursery-Rhyme {
+    padding-top: 25px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,13 +1,65 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Meadowlark Travel</title>
-  </head>
+    {{#if showTests}}
+        <link rel="stylesheet" href="/vendor/mocha.css">
+    {{/if}}
+    {{{_sections.head}}}
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+
+    <script src="/vendor/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+</head>
+
   <body>
-    <header>
-      <img src="/img/logo.jpg" width="50" alt="">
-    </header>
-    {{{body}}}
+
+  <header>
+      <img src="/img/logo.png" height="90" alt="">
+      <div class="link-nav">
+          <a href="/" >HOME</a>
+          <a href="/about">O...</a>
+          <a href="/tours/hood-river">Hood River</a>
+          <a href="/tours/oregon-coast">Oregon Coast</a>
+          <a href="/jquery-test">jQuery Test Page</a>
+          <a href="/nursery-rhyme">Nursery Rhyme</a>
+      </div>
+  </header>
+
+    {{! очень секретный комментарий}}
+  <div class="container">
+      {{{body}}}
+
+      <hr>
+
+      <footer>
+          <p>&copy; Meadowlark Travel <script>document.write(new Date().getFullYear())</script></p>
+      </footer>
+  </div> <!-- /container -->
+
+  <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+  {{{_sections.jquery}}}
+
+  {{#if showTests}}
+      <div id="mocha"></div>
+      <script src="/vendor/mocha.js"></script>
+      <script src="/vendor/chai.js"></script>
+      <script>
+          mocha.ui('tdd');
+          var assert = chai.assert;
+      </script>
+      <script src="/qa/tests-global.js"></script>
+      {{#if pageTestScript}}
+          <script src="{{pageTestScript}}"></script>
+      {{/if}}
+      <script>mocha.run();</script>
+  {{/if}}
+
+  <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/js/main.js"></script>
   </body>
 </html>
