@@ -9,6 +9,10 @@ header {
     border-bottom: 1px solid #e7e7e7;
 }
 
+.img-logo {
+    margin-left: 5px;
+}
+
 .link-nav {
     float: right;
     padding-right: 60px;
@@ -19,14 +23,44 @@ header {
     color: #0b97c4;
     margin-left: 20px;
     text-decoration: none;
+    transition: all 0.3s ease-out;
 }
 
 .link-nav > a:hover {
-    color: darkolivegreen;
+    color: limegreen;
 }
 
 .nursery-Rhyme {
     padding-top: 25px;
+}
+
+.wrapper-template {
+    margin-top: 20px;
+}
+
+.text-information {
+    color: palevioletred;
+    margin-top: 15px;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 999px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
 }
 
 

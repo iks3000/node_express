@@ -1,25 +1,36 @@
 <!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>Meadowlark Travel</title>
-    {{#if showTests}}
-        <link rel="stylesheet" href="/vendor/mocha.css">
-    {{/if}}
-    {{{_sections.head}}}
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+        <title>Meadowlark Travel</title>
+        {{#if showTests}}
+            <link rel="stylesheet" href="/vendor/mocha.css">
+        {{/if}}
+        {{{_sections.head}}}
 
-    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="/css/main.css">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="/vendor/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-</head>
+        <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+        <script src="/vendor/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
 
   <body>
+      <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <![endif]-->
 
   <header>
-      <img src="/img/logo.png" height="90" alt="">
+      <img class="img-logo" src="/img/logo.png" height="90" alt="">
       <div class="link-nav">
           <a href="/" >HOME</a>
           <a href="/about">O...</a>
@@ -27,6 +38,8 @@
           <a href="/tours/oregon-coast">Oregon Coast</a>
           <a href="/jquery-test">jQuery Test Page</a>
           <a href="/nursery-rhyme">Nursery Rhyme</a>
+          <a href="/newsletter">Subscribe</a>
+          <a href="/contest/vacation-photo">Vacation Photo</a>
       </div>
   </header>
 
@@ -37,11 +50,13 @@
       <hr>
 
       <footer>
-          <p>&copy; Meadowlark Travel <script>document.write(new Date().getFullYear())</script></p>
+          <p>&copy; Meadowlark Travel <span class="year-footer"></span></p>
       </footer>
+      {{! {{> footer}}
   </div> <!-- /container -->
 
   <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script>window.jQuery || document.write('<script src="/vendor/js/jquery-2.1.1.min.js"><\/script>')</script>
   {{{_sections.jquery}}}
 
   {{#if showTests}}

@@ -1,11 +1,11 @@
-<div class="weatherWidget">
+<div class="weatherWidget row">
     {{#each partials.weatherContext.locations}}
-        <div class="location">
+        <div class="location col-md-4">
             <h3>{{name}}</h3>
             <a href="{{forecastUrl}}">
                 <img src="{{iconUrl}}" alt="{{weather}}"> {{weather}}, {{temp}}
             </a>
         </div>
     {{/each}}
-    <small>Источник: <a href="http://www.wunderground.com">Weather Underground</a></small>
 </div>
+<small>Источник: <a href="http://www.wunderground.com">Weather Underground</a></small>

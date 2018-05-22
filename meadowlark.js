@@ -1,5 +1,7 @@
-var express = require('express');
-var fortune = require('./lib/fortune.js');
+var express = require('express'),
+    fortune = require('./lib/fortune.js'),
+    formidable = require('formidable'),
+    jqupload = require('jquery-file-upload-middleware');
 
 var app = express();
 
@@ -13,7 +15,8 @@ var handlebars = require('express-handlebars').create({
       this._sections[name] = options.fn(this);
       return null;
     }
-  }
+  },
+  //partialsDir: __dirname + '/views/partials/'  // добавить footer.handlebars в partials
 });
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
@@ -22,11 +25,32 @@ app.set('port', process.env.PORT || 3000);
 
 // ПО static
 app.use(express.static(__dirname + '/public'));
+app.use(require('body-parser').urlencoded({ extended: true}));
 
 // Промежуточное ПО для распознования ?test=1 в строке запроса
 app.use(function(req, res, next){
   res.locals.showTest = app.get('env') !== 'production' && req.query.test === '1';
   next();
+});
+
+// jQuery File Upload промежуточное ПО
+app.use('/upload', function(req, res, next){
+  var now = Date.now();
+  jqupload.fileHandler({
+    uploadDir: function(){
+      return __dirname + '/public/uploads/' + now;
+    },
+    uploadUrl: function(){
+      return '/uploads/' + now;
+    },
+    // Превьюхи изображений
+    // imageVersions: {
+    //   thumbnail: {
+    //     width: 80,
+    //     height: 80
+    //   }
+    // }
+  })(req, res, next);
 });
 
 // Фиктивные данные о погоде
@@ -90,6 +114,43 @@ app.get('/jquery-test', function(req, res){
 app.get('/nursery-rhyme', function(req, res){
   res.render('nursery-rhyme');
 });
+app.get('/newsletter', function(req, res){
+  res.render('newsletter', { csrf: 'CSRF token goes here' });
+});
+app.get('/thank-you', function(req, res){
+  res.render('thank-you');
+});
+
+//Subscribe AJAX
+app.post('/process', function(req, res){
+  if(req.xhr || req.accepts('json.html') === 'json'){
+    //если здесь есть ошибка, то мы должны отправить { error: 'описание ошибки' }
+    res.send({success: true});
+  } else {
+    //если бы была ошибка, нам нужно было бы перенаправлять на страницу ошибки
+    res.redirect(303, '/thank-you');
+  }
+});
+
+//Загрузка файлов на сервер
+app.get('/contest/vacation-photo', function(req, res){
+  var now = new Date();
+  res.render('contest/vacation-photo', { year: now.getFullYear(), month: now.getMonth() });
+});
+app.post('/contest/vacation-photo/:year/:month', function(req, res){
+  var form = new formidable.IncomingForm();
+  form.parse(req, function(err, fields, files){
+    if(err) return res.redirect(303, '/error');
+    console.log('received fields:');
+    console.log(fields);
+    console.log('received files:');
+    console.log(files);
+    res.redirect(303, '/thank-you');
+  });
+});
+
+
+// Генерация детского стишка из ajax
 app.get('/data/nursery-rhyme', function(req, res){
   res.json({
     animal: 'бельчонок',
